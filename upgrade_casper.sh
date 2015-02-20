@@ -14,7 +14,7 @@ logger -p local7.info -t update_casper.sh "starting: $0 $*"
 test "$( whoami )" == "root" || \
     abort "Must run script as 'root'"
 
-jss_zip=`find /tmp -name JSSInstallation*`
+jss_zip=`find /tmp -name JSSInstallation*.zip`
 filecount=`wc -l <<< "$jss_zip"`
 if [[ "$filecount" -lt 1 ]]; then
     abort "JSS installation zip file not found"
@@ -54,7 +54,7 @@ logger -p local7.info -t update_casper.sh "Backing up current ROOT.war file"
 cp /var/lib/tomcat7/webapps/ROOT.war $directory
 
 # unzip the new jss installer
-#unzip "$jss_zip" -d "/tmp"
+#unzip "$jss_zip" -fod "/tmp"
 
 # stop tomcat on both servers
 /etc/init.d/tomcat7 stop
